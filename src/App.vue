@@ -50,7 +50,6 @@ export default defineComponent({
       const name = route.name
       const links = sidebarLinks.value
       for (let i = 0; i < links.length; i++) {
-        console.log('循环了')
         if (links[i].name === name) {
           sidebarIndex.value = i
           break
