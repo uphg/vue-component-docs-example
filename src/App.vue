@@ -13,7 +13,6 @@ interface Links {
 export default defineComponent({
   name: 'App',
   setup () {
-    // refer: https://v3.cn.vuejs.org/guide/composition-api-provide-inject.html#响应性
     const navbarIndex = ref(0)
     const navbarLinks = ref(routes.filter(item => !item.hidden))
     const sidebarVisible = ref(false)
@@ -56,7 +55,8 @@ export default defineComponent({
         }
       }
     }
-
+    
+    // provide 参考: https://v3.cn.vuejs.org/guide/composition-api-provide-inject.html#响应性
     provide('navbarIndex', readonly(navbarIndex))
     provide('navbarLinks', readonly(navbarLinks))
     provide('sidebarVisible', readonly(sidebarVisible))
