@@ -5,13 +5,23 @@ import NotFound from '../Layout/404.vue'
 import { docs } from './docs'
 import { components } from './components'
 import Home from '../views/Home.vue'
+import { DefineComponent, Component } from 'vue'
+
+export interface linkType {
+  path: string;
+  component: DefineComponent | Component;
+  name?: string;
+  redirect?: string;
+  hidden?: boolean;
+  meta?: { [key: string]: string };
+  children?: linkType[]
+}
 
 const history = createWebHistory()
 
-export const routes = [
+export const routes: linkType[] = [
   {
     path: '/',
-    // name: 'Home',
     component: HomeLayout ,
     redirect: '/home',
     meta: { title: '首页' },

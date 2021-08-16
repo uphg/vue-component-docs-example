@@ -4,11 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, provide, readonly, ref, onMounted, nextTick } from 'vue'
-import { routes, router } from './router/index'
-interface Links {
-  name: string;
-  hidden: boolean;
-}
+import { routes, router, linkType } from './router/index'
 
 export default defineComponent({
   name: 'App',
@@ -17,7 +13,7 @@ export default defineComponent({
     const navbarLinks = ref(routes.filter(item => !item.hidden))
     const sidebarVisible = ref(false)
     const sidebarIndex = ref(0)
-    const sidebarLinks = ref<Array<Links>>([])
+    const sidebarLinks = ref<Array<linkType>>([])
 
     const updateNavbarIndex = (route: any) => {
       const name = route.matched[0].name
@@ -41,7 +37,7 @@ export default defineComponent({
       })
     }
 
-    const updateSidebarLinks = (links: Array<Links> = []) => {
+    const updateSidebarLinks = (links: Array<linkType> = []) => {
       sidebarLinks.value = links.filter(item => !(item.hidden))
     }
 
@@ -55,7 +51,7 @@ export default defineComponent({
         }
       }
     }
-    
+
     // provide 参考: https://v3.cn.vuejs.org/guide/composition-api-provide-inject.html#响应性
     provide('navbarIndex', readonly(navbarIndex))
     provide('navbarLinks', readonly(navbarLinks))
