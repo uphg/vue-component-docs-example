@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, provide, readonly, ref, onMounted, nextTick } from 'vue'
-import { routes, router, linkType } from './router/index'
+import { routes, router, LinkType } from './router/index'
 
 export default defineComponent({
   name: 'App',
@@ -13,7 +13,7 @@ export default defineComponent({
     const navbarLinks = ref(routes.filter(item => !item.hidden))
     const sidebarVisible = ref(false)
     const sidebarIndex = ref(0)
-    const sidebarLinks = ref<Array<linkType>>([])
+    const sidebarLinks = ref<Array<LinkType>>([])
 
     const updateNavbarIndex = (route: any) => {
       const name = route.matched[0].name
@@ -37,7 +37,7 @@ export default defineComponent({
       })
     }
 
-    const updateSidebarLinks = (links: Array<linkType> = []) => {
+    const updateSidebarLinks = (links: Array<LinkType> = []) => {
       sidebarLinks.value = links.filter(item => !(item.hidden))
     }
 

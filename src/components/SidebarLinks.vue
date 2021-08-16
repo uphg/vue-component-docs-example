@@ -13,30 +13,34 @@
     </div>
   </div>
 </template>
-<script>
-import { inject, onMounted } from 'vue'
+<script lang="ts">
+import { defineComponent, inject, onMounted, Ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { UpdateSidebarLinksFunc } from '../app-type'
 import SidebarLink from './SidebarLink.vue'
+import { LinkType } from '../router';
 
-export default {
+export default defineComponent({
   components: { SidebarLink },
   setup () {
     const route = useRoute()
     const children = route.matched[0].children
 
     const sidebarIndex = inject('sidebarIndex')
-    const updateSidebarIndex = inject('updateSidebarIndex')
+    const updateSidebarIndex = inject<Function>('updateSidebarIndex')
     const sidebarLinks = inject('sidebarLinks')
-    const updateSidebarLinks = inject('updateSidebarLinks')
+    const updateSidebarLinks = inject<UpdateSidebarLinksFunc>('updateSidebarLinks')
+    const hasHidden = (item: LinkType): boolean => !item.hidden
 
     onMounted(() => {
-      updateSidebarLinks(children.filter(item => !item.hidden))
-      updateSidebarIndex(route)
+      const sidebars = (children as Array<LinkType>).filter((item): boolean => !item.hidden)
+      updateSidebarLinks && updateSidebarLinks(sidebars)
+      updateSidebarIndex && updateSidebarIndex(route)
     })
 
     return { sidebarIndex, sidebarLinks }
   }
-}
+})
 </script>
 <style lang="scss">
 .sidebar-links {

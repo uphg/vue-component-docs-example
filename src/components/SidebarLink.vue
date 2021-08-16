@@ -5,14 +5,16 @@
     :to="path"
   >{{ meta.title }}</router-link>
 </template>
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   props: {
     path: String,
     meta: Object,
     activeClass: Boolean
   }
-}
+})
 </script>
 <style lang="scss">
 .sidebar-link {

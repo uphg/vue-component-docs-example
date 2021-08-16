@@ -4,7 +4,7 @@
     <SidebarLinks />
   </aside>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, inject } from 'vue'
 import NavLinks from './NavLinks.vue'
 import SidebarLinks from './SidebarLinks.vue'

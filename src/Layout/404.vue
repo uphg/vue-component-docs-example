@@ -9,6 +9,8 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
 const message: string[] = [
   `这里什么都没有。`,
   `你是怎么来到这里的？`,
@@ -16,11 +18,11 @@ const message: string[] = [
   `你可能已经断开连接。`
 ]
 
-export default {
+export default defineComponent({
   methods: {
     getMsg (): string {
       return message[Math.floor(Math.random() * message.length)]
     }
   }
-}
+})
 </script>

@@ -1,7 +1,7 @@
 <template>
   <header class="navbar" @click.stop>
     <div class="navbar-left">
-      <button class="sidebar-button" @click="toggleSidebar">{{ sidebarVisible ? '关闭' : '开启' }}</button> 
+      <button class="sidebar-button" @click="toggleSidebar">{{ sidebarVisible ? '关闭' : '开启' }}</button>
       <router-link
         class="logo-link"
         to="/home"
@@ -10,17 +10,17 @@
     <NavLinks />
   </header>
 </template>
-<script>
-import { defineComponent, inject } from 'vue'
+<script lang="ts">
+import { defineComponent, inject, Ref } from 'vue'
 import NavLinks from './NavLinks.vue'
+
 export default defineComponent({
   components: { NavLinks },
   setup() {
-    const sidebarVisible = inject('sidebarVisible')
-    const updateSidebarVisible = inject('updateSidebarVisible')
-
+    const sidebarVisible = inject<Ref<boolean>>('sidebarVisible')
+    const updateSidebarVisible = inject<(value: boolean)=>void>('updateSidebarVisible')
     const toggleSidebar = () => {
-      updateSidebarVisible(!sidebarVisible.value)
+      updateSidebarVisible && updateSidebarVisible(Boolean(!(sidebarVisible && sidebarVisible.value)))
     }
 
     return { sidebarVisible, toggleSidebar }

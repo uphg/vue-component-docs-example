@@ -6,21 +6,24 @@
     @click="clickLinks({ children: link.children })"
   >{{ link.meta && link.meta.title || link.name }}</router-link>
 </template>
-<script>
-import { inject } from 'vue'
-export default {
+<script lang="ts">
+import { defineComponent, inject, Ref } from 'vue'
+import { LinkType } from '../router'
+import { UpdateSidebarLinksFunc } from '../app-type'
+
+export default defineComponent({
   name: 'NavLink',
   props: {
     link: Object,
     activeClass: Boolean
   },
   setup () {
-    const updateSidebarLinks = inject('updateSidebarLinks')
-    const clickLinks = ({ children }) => {
-      updateSidebarLinks(children)
+    const updateSidebarLinks = inject<UpdateSidebarLinksFunc>('updateSidebarLinks')
+    const clickLinks = ({ children }: { children: LinkType[] }) => {
+      updateSidebarLinks && updateSidebarLinks(children)
     }
 
     return { clickLinks }
   }
-}
+})
 </script>

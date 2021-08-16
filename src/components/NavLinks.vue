@@ -12,11 +12,11 @@
     </div>
   </div>
 </template>
-<script>
-import { inject } from 'vue'
+<script lang="ts">
+import { defineComponent, inject } from 'vue';
 import NavLink from './NavLink.vue'
 
-export default {
+export default defineComponent({
   components: { NavLink },
   setup () {
     const navbarIndex = inject('navbarIndex')
@@ -24,5 +24,5 @@ export default {
 
     return { navbarLinks, navbarIndex }
   }
-}
+})
 </script>
