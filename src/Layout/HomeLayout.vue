@@ -16,7 +16,7 @@ import Sidebar from '../components/Sidebar.vue'
 
 export default defineComponent({
   components: { Navbar, Sidebar },
-  setup() {
+  setup () {
     const sidebarVisible = inject<Ref<boolean>>('sidebarVisible')
 
     return { sidebarVisible }

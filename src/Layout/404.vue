@@ -8,8 +8,8 @@
   </div>
 </template>
 
-<script>
-const msgs = [
+<script lang="ts">
+const message: string[] = [
   `这里什么都没有。`,
   `你是怎么来到这里的？`,
   `这是 404 哦。`,
@@ -18,8 +18,8 @@ const msgs = [
 
 export default {
   methods: {
-    getMsg () {
-      return msgs[Math.floor(Math.random() * msgs.length)]
+    getMsg (): string {
+      return message[Math.floor(Math.random() * message.length)]
     }
   }
 }
